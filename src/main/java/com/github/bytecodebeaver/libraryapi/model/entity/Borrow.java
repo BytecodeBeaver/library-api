@@ -25,9 +25,9 @@ public class Borrow {
     @Id
     private Long id;
 
-    @Column(nullable = false)
+    @ManyToOne
     private Copy copy;
-    @Column(nullable = false)
+    @ManyToOne
     private Member member;
     private LocalDateTime borrowDate;
     private LocalDateTime expectedReturnDate;
