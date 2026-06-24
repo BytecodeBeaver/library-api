@@ -26,8 +26,6 @@ erDiagram
     COPY {
         int instanceId PK
         int bookId FK
-        string title
-        int publicationYear
     }
     
     MEMBER ||--o{ BORROW : ""
@@ -103,3 +101,10 @@ A reservation can be:
 - **CANCELLED_BY_MEMBER**: when the reservation has been cancelled by the member.
 - **CANCELLED_BY_LIBRARY**: when the reservation has been cancelled by the library, due to the member not picking up the copy within a certain time frame or other reasons.
 - **FINISHED**: when the reservation has been fulfilled and the copy has been borrowed by the member.
+
+A singular book copy can be in different condition, depending on how the previous borrowers operated with it and what state the book was when library received it:
+- **EXCELLENT**: The book looks like it was never used before
+- **NORMAL**: Has normal wear signs, such as slightly bent edges.
+- **BAD**: The book looks visually unpleasant, but is complete without missing pages
+- **TERRIBLE**: The book looks damaged and has missing pages
+- **UNREADABLE**: The book is in such a poor condition that it shouldn't be rented in normal circumstances. It should only be borrowed if the member insists on it.
