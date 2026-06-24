@@ -100,7 +100,7 @@ A reservation can be:
 - **ACTIVE**: when the copy is currently reserved by a member.
 - **CANCELLED_BY_MEMBER**: when the reservation has been cancelled by the member.
 - **CANCELLED_BY_LIBRARY**: when the reservation has been cancelled by the library, due to the member not picking up the copy within a certain time frame or other reasons.
-- **FINISHED**: when the reservation has been fulfilled and the copy has been borrowed by the member.
+- **FULFILLED**: when the reservation has been fulfilled and the copy has been borrowed by the member.
 
 A singular book copy can be in different condition, depending on how the previous borrowers operated with it and what state the book was when library received it:
 - **EXCELLENT**: The book looks like it was never used before
