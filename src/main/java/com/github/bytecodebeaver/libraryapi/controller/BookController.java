@@ -16,8 +16,29 @@ import java.util.List;
 public class BookController {
     private final BookService bookService;
 
+    @PostMapping
+    public Book createBook(@RequestBody Book book) {
+        return bookService.createNewBook(book);
+    }
+
+    @GetMapping("/{isbn}")
+    public Book getBookById(@PathVariable String isbn) {
+        return bookService.getBookByIsbn(isbn);
+    }
+
     @GetMapping
     public Page<Book> getBooksPaged(Pageable pageable) {
         return bookService.getBooks(pageable);
+    }
+
+    @PatchMapping
+    public Book updateBook(@RequestBody Book book) {
+        return bookService.updateBook(book);
+    }
+
+    @DeleteMapping("/{isbn}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteBookById(@PathVariable String isbn) {
+        bookService.deleteBookByIsbn(isbn);
     }
 }
