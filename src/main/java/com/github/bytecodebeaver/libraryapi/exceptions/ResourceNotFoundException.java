@@ -1,10 +1,13 @@
 package com.github.bytecodebeaver.libraryapi.exceptions;
 
+import lombok.Getter;
+
 public class ResourceNotFoundException extends RuntimeException {
-    public ResourceNotFoundException(String message) {
+    @Getter
+    private final String resourceId;
+
+    public ResourceNotFoundException(String resourceId, String message) {
         super(message);
-    }
-    public ResourceNotFoundException() {
-        super("Resource not found");
+        this.resourceId = resourceId;
     }
 }

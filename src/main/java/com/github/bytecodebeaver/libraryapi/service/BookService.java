@@ -20,13 +20,14 @@ public class BookService {
 
     public Book createNewBook(Book book) {
         bookRepository.findById(book.getIsbn()).ifPresent((existingBook) -> {
-            throw new ResourceAlreadyExistsException();
+            throw new ResourceAlreadyExistsException(book.getIsbn(), "BOOK_ALREADY_EXISTS");
         });
         return bookRepository.save(book);
     }
 
     public Book getBookByIsbn(String isbn) {
-        return bookRepository.findById(isbn).orElseThrow(ResourceNotFoundException::new);
+        return bookRepository.findById(isbn)
+                .orElseThrow(() -> new ResourceNotFoundException(isbn, "BOOK_NOT_FOUND"));
     }
 
     public Page<Book> getBooks(Pageable pageable) {
@@ -37,7 +38,7 @@ public class BookService {
         // Avoid creating a book if there is already on with such id
         return bookRepository.save(
                 bookRepository.findById(book.getIsbn())
-                        .orElseThrow(ResourceNotFoundException::new)
+                        .orElseThrow(() -> new ResourceNotFoundException(book.getIsbn(), "BOOK_NOT_FOUND"))
         );
     }
 
@@ -45,7 +46,7 @@ public class BookService {
         bookRepository.delete(
                 bookRepository
                         .findById(isbn)
-                        .orElseThrow(ResourceNotFoundException::new)
+                        .orElseThrow(() -> new ResourceNotFoundException(isbn, "BOOK_NOT_FOUND"))
         );
     }
 }
