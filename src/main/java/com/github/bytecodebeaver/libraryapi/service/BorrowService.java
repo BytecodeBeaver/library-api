@@ -6,12 +6,7 @@ import com.github.bytecodebeaver.libraryapi.model.entity.Copy;
 import com.github.bytecodebeaver.libraryapi.model.entity.Member;
 import com.github.bytecodebeaver.libraryapi.repository.BorrowRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Limit;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.time.LocalDateTime;
 
@@ -40,9 +35,7 @@ public class BorrowService {
         return borrow;
     }
 
-    public isCopyBorrowed(Long id) {
-        // Find borrow for copy id and get the newest one. If It's present, then check if It's expired
-        // SELECT * FROM borrows WHERE copy_id = %copy_id_param AND return_date == null;
-        return borrowRepository.findByCopy(id, Limit.of(1));
+    public boolean isCopyBorrowed(Long id) {
+        return borrowRepository.countActiveBorrows(id) > 0;
     }
 }

@@ -1,7 +1,5 @@
 package com.github.bytecodebeaver.libraryapi.model.entity;
 
-import jakarta.annotation.Nonnull;
-import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
