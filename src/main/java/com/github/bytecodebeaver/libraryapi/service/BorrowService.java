@@ -17,7 +17,7 @@ public class BorrowService {
     private final CopyService copyService;
     private final MemberService memberService;
 
-    public Borrow createBorrow(BorrowRequestDTO borrowData, int forDays) {
+    public Borrow createBorrow(BorrowRequestDTO borrowData) {
         Copy copy = new Copy();
         copy.setId(borrowData.bookCopyId());
 
@@ -29,8 +29,8 @@ public class BorrowService {
         Borrow borrow = new Borrow();
         borrow.setMember(member);
         borrow.setCopy(copy);
-        borrow.setBorrowDate(now);
-        borrow.setExpectedReturnDate(now.plusDays(forDays));
+        borrow.setBorrowDate(borrowData.borrowDate());
+        borrow.setExpectedReturnDate(borrowData.expectedReturnDate());
 
         return borrow;
     }
