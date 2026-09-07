@@ -6,6 +6,8 @@ import com.github.bytecodebeaver.libraryapi.model.entity.Copy;
 import com.github.bytecodebeaver.libraryapi.model.entity.Member;
 import com.github.bytecodebeaver.libraryapi.repository.BorrowRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -35,7 +37,28 @@ public class BorrowService {
         return borrow;
     }
 
+    
+
     public boolean isCopyBorrowed(Long id) {
         return borrowRepository.countActiveBorrows(id) > 0;
+    }
+
+    public Borrow getBorrowById(Long id) {
+        return borrowRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Borrow not found with id: " + id));
+    }
+
+    public Page<Borrow> getBorrowsPaged(Pageable pageable) {
+        return borrowRepository.findAll(pageable);
+    }
+
+    public Borrow updateBorrow(Borrow borrow) {
+        return borrowRepository.save(borrow);
+    }
+
+    public void softDeleteBorrowById(Long id) {
+        Borrow borrow = getBorrowById(id);
+        // TODO: Implement soft delete logic, e.g., set a 'deleted' flag or similar
+        borrowRepository.save(borrow);
     }
 }
