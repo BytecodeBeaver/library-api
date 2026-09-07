@@ -1,9 +1,7 @@
 package com.github.bytecodebeaver.libraryapi.controller;
 
 import com.github.bytecodebeaver.libraryapi.model.dto.BorrowRequestDTO;
-import com.github.bytecodebeaver.libraryapi.model.entity.Book;
 import com.github.bytecodebeaver.libraryapi.model.entity.Borrow;
-import com.github.bytecodebeaver.libraryapi.service.BookService;
 import com.github.bytecodebeaver.libraryapi.service.BorrowService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
