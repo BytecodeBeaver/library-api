@@ -12,8 +12,8 @@ public class JwtAuthService {
     private final AuthenticationService authenticationService;
     private final MemberRegistrationService memberRegistrationService;
 
-    public void register(String firstName, String lastName, String email, String password, String phoneNumber) {
-        memberRegistrationService.registerMember(firstName, lastName, email, password, phoneNumber);
+    public Member register(String firstName, String lastName, String email, String password, String phoneNumber) {
+        return memberRegistrationService.registerMember(firstName, lastName, email, password, phoneNumber);
     }
 
     public String getAuthorizationToken(String username, String password) {

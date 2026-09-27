@@ -16,7 +16,7 @@ public class MemberRegistrationService {
     private final PasswordEncoder passwordEncoder;
 
     @Transactional
-    public void registerMember(String firstName, String lastName, String email, String password, String phoneNumber) {
+    public Member registerMember(String firstName, String lastName, String email, String password, String phoneNumber) {
         if (memberRepository.findByEmail(email).isPresent()) {
             throw new EmailAlreadyInUseException();
         }
@@ -34,5 +34,7 @@ public class MemberRegistrationService {
         );
 
         memberRepository.save(member);
+
+        return member;
     }
 }
