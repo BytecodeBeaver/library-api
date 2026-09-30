@@ -32,10 +32,9 @@ public class BookService {
 
     public Book updateBook(Book book) {
         // Avoid creating a book if there is already on with such id
-        return bookRepository.save(
-                bookRepository.findById(book.getIsbn())
-                        .orElseThrow(() -> new ResourceNotFoundException(book.getIsbn(), "BOOK_NOT_FOUND"))
-        );
+        bookRepository.findById(book.getIsbn())
+                .orElseThrow(() -> new ResourceNotFoundException(book.getIsbn(), "BOOK_NOT_FOUND"));
+        return bookRepository.save(book);
     }
 
     public void deleteBookByIsbn(String isbn) {

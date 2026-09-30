@@ -33,10 +33,9 @@ public class AuthorService {
 
     public Author updateAuthor(Author author) {
         // Avoid creating a author if there is already on with such id
-        return authorRepository.save(
-                authorRepository.findById(author.getId())
-                        .orElseThrow(() -> new ResourceNotFoundException(author.getId().toString(), "AUTHOR_NOT_FOUND"))
-        );
+        authorRepository.findById(author.getId())
+                .orElseThrow(() -> new ResourceNotFoundException(author.getId().toString(), "AUTHOR_NOT_FOUND"));
+        return authorRepository.save(author);
     }
 
     public void deleteAuthorById(Long id) {
